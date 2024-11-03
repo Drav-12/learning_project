@@ -1,4 +1,2 @@
-image1.jpg
-image2.jpg
-result.jpg
-yolo11n.pt
+*.jpg
+*.pt
