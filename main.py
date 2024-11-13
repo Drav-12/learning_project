@@ -6,7 +6,7 @@ model = YOLO("yolo11n.pt")  # pretrained YOLO11n model
 # Request user input
 image_input = input("Enter the path of the image you want to use (leave empty to exit): ")
 
-if image_input:
+if image_input and (image_input.endswith(".png") or image_input.endswith(".jpg") or image_input.endswith(".jpeg")):
     # Run batched inference on a the user image
     results = model([image_input], stream=True)  # return a generator of Results objects
 
@@ -29,3 +29,6 @@ if image_input:
     for result in results:
         result.show()  # display to screen
         result.save(filename="result.jpg")  # save to disk
+else:
+    if image_input:
+        print("The path used is not an image")
