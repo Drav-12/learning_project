@@ -1,10 +1,12 @@
+from ultralytics import YOLO
+
 # Load the YOLO model for object detection
 model_od = YOLO("yolo11n.pt")  # pretrained YOLO11n model
 
 # Request user input for the image path
 image_input = input("Enter the path of the image you want to use (leave empty to exit): ")
 
-if image_input:
+if image_input and (image_input.endswith(".jpg") or image_input.endswith(".png") or image_input.endswith(".jpeg")):
     # Request user input for the basename
     basename = input("Enter the basename for the output files: ")
 
@@ -26,5 +28,8 @@ if image_input:
     for result in results_pe:
         result.show()  # display to screen
         result.save(filename=f"{basename}_pe.jpg")  # save to disk with "_pe" suffix
+else:
+    if image_input:
+        print("The path used is not an image")
 
 print("Processing completed.")
